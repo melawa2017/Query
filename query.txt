@@ -1,0 +1,15 @@
+SELECT user.user_id,user.username,training_details.training_id, training_details.training_date , count(*) as count FROM
+user 
+left join training_details on user.user_id = training_details.user_id
+group by training_details.user_id,training_details.training_id, training_details.training_date 
+HAVING count(*) > 1
+order by training_details.training_date desc
+
+============================
+
+SELECT user.user_id,user.username,training_details.training_id, training_details.training_date , count(training_details.training_date) as count FROM
+user 
+left join training_details on user.user_id = training_details.user_id
+group by training_details.user_id,training_details.training_id
+HAVING count(training_details.training_date) > 1
+order by training_details.training_date desc
